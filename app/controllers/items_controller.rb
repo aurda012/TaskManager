@@ -15,13 +15,27 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path
+      redirect_to root_path, notice: "Your task has been created!"
     else
       render 'new'
     end
   end
 
+  def edit
+  end
 
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item), notice: "Your task has been updated!"
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
 
   private
 
